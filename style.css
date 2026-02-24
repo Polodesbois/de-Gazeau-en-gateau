@@ -1,0 +1,361 @@
+﻿* {
+  box-sizing: border-box;
+  font-family: "Times New Roman", serif;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background-color: #fffaf3;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+nav {
+  background-color: #7e3f22;
+  color: white;
+  font-weight: bold;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1440px, 100%);
+  z-index: 20;
+}
+
+main {
+  min-height: 90vh;
+  padding: 5.25rem 0 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #fffaf3;
+}
+
+h1 {
+  text-align: center;
+  margin: 0.5em 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#content {
+  width: min(1100px, 100% - 2rem);
+  margin: 1.5rem auto 2rem;
+  flex: 1;
+}
+
+/* barre de navigation */
+
+nav ul {
+  width: 100%;
+  margin: 0;
+  padding: 1rem 1.5rem;
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.25rem 1rem;
+}
+
+nav li {
+  margin: 0;
+}
+
+nav a {
+  display: inline-block;
+  padding: 0.35rem 0.45rem;
+}
+
+p {
+  text-indent: 17px;
+}
+
+form {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin: 2em 0;
+}
+
+/* Barre de recherche */
+
+#searchForm {
+  width: min(720px, 100%);
+  margin: 1rem auto 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  background: #fff8f2;
+  border: 1px solid #e6d6c7;
+  border-radius: 14px;
+  padding: 10px;
+  box-shadow: 0 8px 20px rgba(70, 40, 20, 0.1);
+}
+
+#searchInput {
+  border: 1px solid #d2b8a1;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 1rem;
+  background: #fff;
+  color: #3b2214;
+}
+
+#searchInput::placeholder {
+  color: #9b7d66;
+}
+
+#searchInput:focus {
+  outline: none;
+  border-color: #8b4513;
+  box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.2);
+}
+
+#searchForm button[type="submit"] {
+  border: none;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #a0522d, #6f3a1c);
+  color: white;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.2s ease;
+}
+
+#searchForm button[type="submit"]:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+
+#searchForm button[type="submit"]:active {
+  transform: translateY(0);
+}
+
+/* Conteneur des recettes */
+
+#recipeList {
+  width: min(1100px, 100% - 2rem);
+  margin: 1rem auto 2rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+/* Chaque recette = carte */
+#recipeList li {
+  list-style: none;
+  margin: 0;
+  background: #fff8f2;
+  border: 1px solid #e6d6c7;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(70, 40, 20, 0.1);
+  transition: transform 0.18s ease, box-shadow 0.2s ease;
+}
+
+#recipeList li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(70, 40, 20, 0.16);
+}
+
+/* Lien plein bloc */
+#recipeList li a {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: #3b2214;
+  min-height: 210px;
+  font-weight: 700;
+  text-align: center;
+  padding: 12px 14px;
+  line-height: 1.3;
+}
+
+/* Zone photo (placeholder pour plus tard) */
+#recipeList li a::before {
+  content: "Photo recette";
+  display: grid;
+  place-items: center;
+  height: 130px;
+  margin: -12px -14px 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #9b7d66;
+  background: linear-gradient(135deg, #f7e7d8, #ecd7c5);
+  border-bottom: 1px solid #e6d6c7;
+}
+
+/* Focus clavier */
+#recipeList li a:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 3px rgba(139, 69, 19, 0.35);
+}
+
+/* GALERIE PHOTOS RESPONSIVE */
+
+.grid-container {
+  width: min(1200px, 100%);
+  margin-inline: auto;
+  padding: clamp(8px, 2vw, 20px);
+}
+
+.grid-container ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: clamp(10px, 1.8vw, 22px);
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+
+.grid-container li {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #f3f3f3;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.grid-container img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.grid-container li:hover img {
+  transform: scale(1.05);
+}
+
+footer {
+  padding: 12px;
+  text-align: center;
+  background-color: #7e3f22;
+  color: white;
+}
+
+footer p {
+  margin: 0;
+  text-indent: 0;
+}
+
+@media (max-width: 860px) {
+  main {
+    padding-top: 5.5rem;
+  }
+
+  nav ul {
+    justify-content: center;
+    padding: 0.85rem 1rem;
+    gap: 0.35rem 0.8rem;
+  }
+
+  #content {
+    width: min(1100px, 100% - 1.5rem);
+  }
+}
+
+@media (max-width: 640px) {
+  main {
+    padding-top: 5.9rem;
+  }
+
+  nav ul {
+    gap: 0.5rem 1.25rem;
+  }
+
+  nav a {
+    padding: 0.4rem 0.55rem;
+    font-size: 0.95rem;
+  }
+
+  #searchForm {
+    grid-template-columns: 1fr;
+    margin-top: 0.6rem;
+    border-radius: 12px;
+    padding: 8px;
+  }
+
+  #searchForm button[type="submit"] {
+    width: 100%;
+  }
+
+  #searchInput {
+    padding: 11px 12px;
+  }
+
+  #recipeList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    width: min(1100px, 100% - 1rem);
+  }
+
+  #recipeList li a::before {
+    height: 100px;
+  }
+
+  #recipeList li a {
+    min-height: 170px;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+  }
+
+  #recipeList li a::before {
+    margin: -10px -12px 10px;
+  }
+
+  .grid-container ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-container img {
+    aspect-ratio: 1 / 1;
+  }
+}
+
+@media (max-width: 380px) {
+  main {
+    padding-top: 6.3rem;
+  }
+
+  nav ul {
+    gap: 0.35rem 0.9rem;
+    padding: 0.65rem 0.4rem;
+  }
+
+  nav a {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  p {
+    text-indent: 10px;
+  }
+
+  #recipeList {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-container ul {
+    grid-template-columns: 1fr;
+  }
+}

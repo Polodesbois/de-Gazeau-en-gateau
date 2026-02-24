@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="shortcut icon" href="../image/ffavicon.webp" type="image/x-icon" />
+    <title>Liste recettes</title>
+</head>
+<body>
+  <nav>
+      <ul>
+        <li><a href="../index.html">Acceuil</a></li>
+        <li><a href="#">Recettes</a></li>
+        <li><a href="./souvenirs.html">Souvenirs</a></li>
+      </ul>
+  </nav>
+  <main>
+    <form id="searchForm">
+      <input id="searchInput" type="text" placeholder="Rechercher une recette" />
+      <button type="submit">Rechercher</button>
+    </form>
+    <div id="recipeList">
+        <li><a href="./recettes/5-4-3-2-1.html">5-4-3-2-1</a></li>
+        <li><a href="./recettes/Baba au rhum.html">Baba au rhum</a></li>
+        <li><a href="./recettes/Brioche.html">Brioche</a></li>
+        <li><a href="./recettes/Cake à la carotte.html">Cake à la carotte</a></li>
+        <li><a href="./recettes/Caramel au beurre salé.html">Caramel au beurre salé</a></li>
+        <li><a href="./recettes/Caramels mous au chocolat.html">Caramels mous au chocolat</a></li>
+        <li><a href="./recettes/Confiture à la rhubarbe.html">Confiture à la rhubarbe</a></li>
+        <li><a href="./recettes/Cookies.html">Cookies</a></li>
+        <li><a href="./recettes/crumble aux fruits rouges.html">Crumble aux fruits rouges</a></li>
+        <li><a href="./recettes/crumble aux pommes.html">Crumble aux pommes</a></li>
+        <li><a href="./recettes/Financiers.html">Financiers</a></li>
+        <li><a href="./recettes/Fondant tiède au chocolat.html">Fondant tiède au chocolat</a></li>
+        <li><a href="./recettes/Fondant à l orange.html">Fondant à l'orange</a></li>
+        <li><a href="./recettes/Galette des rois.html">Galette des rois</a></li>
+        <li><a href="./recettes/Gâteau au chocolat Laure.html">Gâteau au chocolat (Laure)</a></li>
+        <li><a href="./recettes/Gâteau au chocolat maman.html">Gâteau au chocolat (maman)</a></li>
+        <li><a href="./recettes/Gâteau aux noisettes.html">Gâteau aux noisettes</a></li>
+        <li><a href="./recettes/Gâteau glacé.html">Gâteau glacé</a></li>
+        <li><a href="./recettes/Gâteau millas de Tatie.html">Gâteau millas de Tatie</a></li>
+        <li><a href="./recettes/Granola de Blandine.html">Granola de Blandine</a></li>
+        <li><a href="./recettes/Macaron.html">Macaron</a></li>
+        <li><a href="./recettes/Meringues.html">Meringues</a></li>
+        <li><a href="./recettes/Millefeuilles au chocolat.html">Millefeuilles au chocolat</a></li>
+        <li><a href="./recettes/Mousse capucino au chocolat.html">Mousse capucino au chocolat</a></li>
+        <li><a href="./recettes/Nougat glacé.html">Nougat glacé</a></li>
+        <li><a href="./recettes/Pain aux noix.html">Pain aux noix</a></li>
+        <li><a href="./recettes/Pâte sablée.html">Pâte sablée</a></li>
+        <li><a href="./recettes/Pavés au chocolat.html">Pavés au chocolat</a></li>
+        <li><a href="./recettes/Riz au lait.html">Riz au lait</a></li>
+        <li><a href="./recettes/Sorbet fraise.html">Sorbet fraise</a></li>
+        <li><a href="./recettes/Tarte à la rhubarbe.html">Tarte a la rhubarbe</a></li>
+        <li><a href="./recettes/Tarte au citron.html">Tarte au citron meringuée</a></li>            
+        <li><a href="./recettes/Tarte d Angoulême.html">Tarte d'Angoulême</a></li>
+        <li><a href="./recettes/Tiramisu.html">Tiramisu</a></li>
+    </div>
+  </main>
+  <script>
+  const input = document.getElementById("searchInput");
+  const form = document.getElementById("searchForm");
+  const items = Array.from(document.querySelectorAll("#recipeList li"));
+
+  const normalize = (str) =>
+    str
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "") // enlève les accents
+      .trim();
+
+  function filterRecipes() {
+    const q = normalize(input.value);
+    let firstVisibleLink = null;
+
+    items.forEach((li) => {
+      const a = li.querySelector("a");
+      const text = normalize(a.textContent);
+      const match = text.includes(q);
+      li.style.display = match ? "" : "none";
+      if (match && !firstVisibleLink) firstVisibleLink = a;
+    });
+
+    return firstVisibleLink;
+  }
+
+  input.addEventListener("input", filterRecipes);
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const firstMatch = filterRecipes();
+    if (firstMatch) {
+      window.location.href = firstMatch.href; // ouvre directement la bonne recette
+    }
+  });
+</script>
+</body>
+<footer>
+  <p>Copyright 2024 by Paul GAZEAU. All Rights Reserved.</p>
+</footer>
+</html>
